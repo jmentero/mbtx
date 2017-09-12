@@ -11455,7 +11455,9 @@ void timer(int16_t throttle_val)
 			val = 0 ;
 		}
 
-    ptimer->s_sum += val ;   // Add val in
+    //ptimer->s_sum += val ;   // Add val in
+    if (val || ptimer->s_timeCumThr) ptimer->s_timeCumThr += 1; // Ths does not stop when throttle down once triggered.
+
     if( ( (uint16_t)( get_tmr10ms()-s_time) ) < 100 )		// BEWARE of 32 bit processor extending 16 bit values
 		{
 			if ( timer == 0 )
